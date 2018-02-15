@@ -5,7 +5,7 @@ class SubscriptionController < ApplicationController
   include PayPal::SDK::REST
   skip_before_action :verify_authenticity_token 
 
-  def show
+  def index
   end
 
   def create_subscription
@@ -33,14 +33,18 @@ class SubscriptionController < ApplicationController
   	api = API.new
   	path = "v1/payments/billing-agreements/#{params[:paymentToken]}/agreement-execute"
     response = api.post(path, {}, { "PayPal-Request-Id" => SecureRandom.uuid.to_s })
-    logger.info response
-  	render plain: :ok
+    render :json => response.to_json 
+  end
+
+  def show
+    @agreement = Agreement.find(params[:agreement_id])
   end
 
   def return
   end
 
   def cancel
+    params[:agreement_id]
   end
 
   #Create plan and activate it

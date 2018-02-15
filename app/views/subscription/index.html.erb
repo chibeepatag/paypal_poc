@@ -1,0 +1,45 @@
+<h1>Subscribe Via PayPal</h1>
+
+<div id="paypal-button"></div>
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<script>
+    var CREATE_PAYMENT_URL  = 'http://localhost:3000/subscription/create_subscription';
+    var EXECUTE_PAYMENT_URL = 'http://localhost:3000/subscription/execute_payment';
+
+    paypal.Button.render({
+
+        env: 'sandbox', // Or 'sandbox'
+
+        commit: true, // Show a 'Pay Now' button
+
+        client: {
+            sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
+        },
+
+        payment: function() {
+            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+            	console.log(data)
+                return data.token;
+            });
+        },
+
+        onAuthorize: function(data) {
+        	console.log(data)
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+            	orderID: data.orderID,
+				paymentToken: data.paymentToken
+            }).then(function(data) {
+                console.log("Agreement ID: ", data.id)
+                alert("Complete!")
+                window.location = "http://localhost:3000/subscription/show?agreement_id=" + data.id
+            });
+        }, 
+
+        onCancel: function(data){
+
+        }
+
+    }, '#paypal-button');
+</script>

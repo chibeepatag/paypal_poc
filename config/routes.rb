@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'subscription/index'
   get 'subscription/show'
   get 'subscription/return'
   get 'subscription/cancel'

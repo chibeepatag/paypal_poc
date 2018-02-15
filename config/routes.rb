@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get 'subscription/index'
   get 'subscription/show'
-  get 'subscription/return'
+  get 'subscription/suspend'
+  get 'subscription/re_activate'
   get 'subscription/cancel'
   post 'subscription/create_subscription'
   post 'subscription/execute_payment'

@@ -1,5 +1,7 @@
+<h1>Billing Agreement</h1>
 ID: <%=@agreement.id%> <br/>
 Description: <%=@agreement.description%> <br/>
+State: <%=@agreement.state%>
 
 <h2>Payer </h2>
 Email: <%=@agreement.payer.payer_info.email%><br/>
@@ -8,5 +10,10 @@ Last Name: <%=@agreement.payer.payer_info.last_name%>
 
 <h2>Plan </h2>
 Frequency: <%=@agreement.plan.payment_definitions.first.frequency%><br/>
-Amount: <%=@agreement.plan.payment_definitions.first.amount.value%>
+Amount: <%=@agreement.plan.payment_definitions.first.amount.value%><br/>
+
+<br/>
+<%=link_to "Suspend", subscription_suspend_path(agreement_id: @agreement.id)%> | 
+<%=link_to "Re Activate", subscription_re_activate_path(agreement_id: @agreement.id)%> | 
+<%=link_to "Cancel", subscription_cancel_path(agreement_id: @agreement.id)%>
 

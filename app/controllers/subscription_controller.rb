@@ -40,11 +40,32 @@ class SubscriptionController < ApplicationController
     @agreement = Agreement.find(params[:agreement_id])
   end
 
-  def return
+  def suspend
+    agreement_id = params[:agreement_id]
+    agreement = Agreement.find(agreement_id)
+
+    state_descriptor = AgreementStateDescriptor.new( :note => "Suspending the agreement" )
+    agreement.suspend(state_descriptor)
+    @agreement = Agreement.find(agreement_id)
+    render "show"
+  end
+
+  def re_activate
+    agreement_id = params[:agreement_id]
+    agreement = Agreement.find(agreement_id)
+    state_descriptor = AgreementStateDescriptor.new( :note => "Re-activating the agreement" )
+    agreement.re_activate(state_descriptor)
+    @agreement = Agreement.find(agreement_id)
+    render "show"
   end
 
   def cancel
-    params[:agreement_id]
+    agreement_id = params[:agreement_id]
+    agreement = Agreement.find(agreement_id)
+    state_descriptor = AgreementStateDescriptor.new( :note => "Cancelling the agreement" )
+    agreement.cancel(state_descriptor)
+    @agreement = Agreement.find(agreement_id)
+    render "show"
   end
 
   #Create plan and activate it

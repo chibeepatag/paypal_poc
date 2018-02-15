@@ -1,24 +1,12 @@
-# README
+# paypal_poc
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails project uses https://github.com/paypal/PayPal-Ruby-SDK
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+0. Replace client_id and client_secret in config/paypal.yml
+1. bundle install
+2. rails s
+3. visit 
+http://localhost:3000/greetings/hello #for client side payments
+http://localhost:3000/greetings/serverside # for server side payments
+http://localhost:3000/greetings/subscribe #for subscription using PayPal button provided in merchant account
+http://localhost:3000/subscription/show #for server side subscription

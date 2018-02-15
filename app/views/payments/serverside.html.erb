@@ -1,10 +1,11 @@
+<h2>Server Side REST</h2>
 <div id="paypal-button"></div>
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 <script>
-    var CREATE_PAYMENT_URL  = 'http://localhost:3000/server_side_payments/create_payment';
-    var EXECUTE_PAYMENT_URL = 'http://localhost:3000/server_side_payments/execute_payment';
+    var CREATE_PAYMENT_URL  = 'http://localhost:3000/payments/create_payment';
+    var EXECUTE_PAYMENT_URL = 'http://localhost:3000/payments/execute_payment';
 
     paypal.Button.render({
 

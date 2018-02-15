@@ -5,12 +5,11 @@ Rails.application.routes.draw do
   post 'subscription/create_subscription'
   post 'subscription/execute_payment'
   
-  post 'server_side_payments/create_payment'
-  post 'server_side_payments/execute_payment'
-
-  get 'greetings/hello'
-  get 'greetings/subscribe'
-  get 'greetings/serverside'
+  post 'payments/create_payment'
+  post 'payments/execute_payment'
+  get 'payments/clientside'
+  get 'payments/subscribe'
+  get 'payments/serverside'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

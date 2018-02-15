@@ -1,0 +1,36 @@
+<div id="paypal-button"></div>
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<script>
+    var CREATE_PAYMENT_URL  = 'http://localhost:3000/server_side_payments/create_payment';
+    var EXECUTE_PAYMENT_URL = 'http://localhost:3000/server_side_payments/execute_payment';
+
+    paypal.Button.render({
+
+        env: 'sandbox', // Or 'sandbox'
+
+        commit: true, // Show a 'Pay Now' button
+
+        client: {
+            sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
+        },
+
+        payment: function() {
+            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                return data.id;
+            });
+        },
+
+        onAuthorize: function(data) {
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                paymentID: data.paymentID,
+                payerID:   data.payerID
+            }).then(function() {
+                alert("Complete!")
+                console.log("Payment is complete", data.paymentID, data.payerID)
+            });
+        }
+
+    }, '#paypal-button');
+</script>

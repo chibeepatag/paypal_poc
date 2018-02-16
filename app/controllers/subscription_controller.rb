@@ -38,6 +38,9 @@ class SubscriptionController < ApplicationController
 
   def show
     @agreement = Agreement.find(params[:agreement_id])
+    start_date = @agreement.start_date.slice(0, 10) #remove time portion of start_date
+    end_date = Time.current.strftime("%Y-%m-%d")
+    @transactions = Agreement.transactions(params[:agreement_id], start_date, end_date)
   end
 
   def suspend

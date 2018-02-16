@@ -12,6 +12,35 @@ Last Name: <%=@agreement.payer.payer_info.last_name%>
 Frequency: <%=@agreement.plan.payment_definitions.first.frequency%><br/>
 Amount: <%=@agreement.plan.payment_definitions.first.amount.value%><br/>
 
+<h2>Transactions</h2>
+<table>
+	<tr>
+		<td>Transaction ID</td>
+		<td>Status</td>
+		<td>Transaction Type</td>
+		<td>Amount</td>
+		<td>Fee</td>
+		<td>Net Amount</td>
+		<td>Payer Email</td>
+		<td>Payer Name</td>
+		<td>Time Zone</td>
+		<td>Timestamp</td>
+	</tr>
+<%@transactions.agreement_transaction_list.each do |transaction|%>
+<tr>
+	<td><%=transaction.transaction_id%></td>
+	<td><%=transaction.status%></td>
+	<td><%=transaction.transaction_type%></td>
+	<td><%=transaction.amount.value%></td>
+	<td><%=transaction.fee_amount.value%></td>
+	<td><%=transaction.net_amount.value%></td>
+	<td><%=transaction.payer_email %></td>
+    <td><%=transaction.payer_name%></td>
+    <td><%=transaction.time_zone  %></td>
+    <td><%=transaction.time_stamp %></td>
+</tr>
+<%end%>
+</table>
 <br/>
 <%=link_to "Suspend", subscription_suspend_path(agreement_id: @agreement.id)%> | 
 <%=link_to "Re Activate", subscription_re_activate_path(agreement_id: @agreement.id)%> | 

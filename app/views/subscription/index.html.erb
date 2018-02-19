@@ -1,6 +1,9 @@
 <h1>Subscribe Via PayPal</h1>
 
-<div id="paypal-button"></div>
+<span>Rectangular, small, gold, label: pay, tagline: false<div id="paypal-button"></div><br/>
+<span>Pill, small, blue, label: paypal</span><div id="paypal-button-blue"></div><br/>
+<span>Pill, medium, silver</span><div id="paypal-button-silver"></div><br/>
+<span>Pill, large, black</span><div id="paypal-button-black"></div><br/>
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
@@ -13,6 +16,14 @@
         env: 'sandbox', // Or 'sandbox'
 
         commit: true, // Show a 'Pay Now' button
+
+        style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'rect',
+            label: 'pay',
+            tagline: false
+        },
 
         client: {
             sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
@@ -42,4 +53,130 @@
         }
 
     }, '#paypal-button');
+
+     paypal.Button.render({
+
+        env: 'sandbox', // Or 'sandbox'
+
+        commit: true, // Show a 'Pay Now' button
+
+        style: {
+            size: 'small',
+            color: 'blue',
+            shape: 'pill',
+            label: 'paypal'
+        },
+
+        client: {
+            sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
+        },
+
+        payment: function() {
+            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                console.log(data)
+                return data.token;
+            });
+        },
+
+        onAuthorize: function(data) {
+            console.log(data)
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                orderID: data.orderID,
+                paymentToken: data.paymentToken
+            }).then(function(data) {
+                console.log("Agreement ID: ", data.id)
+                alert("Complete!")
+                window.location = "http://localhost:3000/subscription/show?agreement_id=" + data.id
+            });
+        }, 
+
+        onCancel: function(data){
+
+        }
+
+    }, '#paypal-button-blue');
+
+    paypal.Button.render({
+
+        env: 'sandbox', // Or 'sandbox'
+
+        commit: true, // Show a 'Pay Now' button
+
+        style: {
+            size: 'medium',
+            color: 'silver',
+            shape: 'pill',
+            label: 'checkout'
+        },
+
+        client: {
+            sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
+        },
+
+        payment: function() {
+            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                console.log(data)
+                return data.token;
+            });
+        },
+
+        onAuthorize: function(data) {
+            console.log(data)
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                orderID: data.orderID,
+                paymentToken: data.paymentToken
+            }).then(function(data) {
+                console.log("Agreement ID: ", data.id)
+                alert("Complete!")
+                window.location = "http://localhost:3000/subscription/show?agreement_id=" + data.id
+            });
+        }, 
+
+        onCancel: function(data){
+
+        }
+
+    }, '#paypal-button-silver');
+
+    paypal.Button.render({
+
+        env: 'sandbox', // Or 'sandbox'
+
+        commit: true, // Show a 'Pay Now' button
+
+        style: {
+            size: 'large',
+            color: 'black',
+            shape: 'pill',
+            label: 'checkout'
+        },
+
+        client: {
+            sandbox: 'Aefc7tVb69fkHNpPXUlt-LqZ34vjMubs3voNVqH4HPMNU0fPefDYTMzRnAcGdmA3VpoTfdipGNPqsfou'
+        },
+
+        payment: function() {
+            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                console.log(data)
+                return data.token;
+            });
+        },
+
+        onAuthorize: function(data) {
+            console.log(data)
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                orderID: data.orderID,
+                paymentToken: data.paymentToken
+            }).then(function(data) {
+                console.log("Agreement ID: ", data.id)
+                alert("Complete!")
+                window.location = "http://localhost:3000/subscription/show?agreement_id=" + data.id
+            });
+        }, 
+
+        onCancel: function(data){
+
+        }
+
+    }, '#paypal-button-black');
 </script>

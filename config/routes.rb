@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'subscription/re_activate'
   get 'subscription/cancel'
   post 'subscription/create_subscription'
+  post 'subscription/create_subscription_without_setup'
+  post 'subscription/create_subscription_with_setup'
   post 'subscription/execute_payment'
   
   post 'payments/create_payment'

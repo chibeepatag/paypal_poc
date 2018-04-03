@@ -26,6 +26,48 @@ class SubscriptionController < ApplicationController
     render :json => agreement.to_json
   end
 
+  def create_subscription_without_setup
+     time = Time.now + 5.minutes
+
+    agreement_attributes = {
+      "name" => "Premium Subscription for Account Frisbee Test Branch Omron",
+      "description" => "Premium Subscription for Account Frisbee Test Branch Omron",
+      "start_date" => time.iso8601,
+      "payer" => {
+          "payment_method" => "paypal"
+      }   
+    }
+    agreement = Agreement.new(agreement_attributes)
+    #agreement.plan =  Plan.new( :id => "P-7KB30620JA6802433S7TMGJQ" ) #replace with plan id generated in create_plan
+    daily_plan_without_setup = 'P-96L47464B01906940DDFCH5Q'
+    daily_plan_with_setup    = 'P-31H91733D1552441DDDEEE5A'
+    agreement.plan =  Plan.new( :id => daily_plan_without_setup )
+    agreement.create
+
+    render :json => agreement.to_json
+  end
+
+  def create_subscription_with_setup
+     time = Time.now + 5.minutes
+
+    agreement_attributes = {
+      "name" => "Premium Subscription for Account Frisbee Test Branch Omron",
+      "description" => "Premium Subscription for Account Frisbee Test Branch Omron",
+      "start_date" => time.iso8601,
+      "payer" => {
+          "payment_method" => "paypal"
+      }   
+    }
+    agreement = Agreement.new(agreement_attributes)
+    #agreement.plan =  Plan.new( :id => "P-7KB30620JA6802433S7TMGJQ" ) #replace with plan id generated in create_plan
+    daily_plan_without_setup = 'P-96L47464B01906940DDFCH5Q'
+    daily_plan_with_setup    = 'P-31H91733D1552441DDDEEE5A'
+    agreement.plan =  Plan.new( :id => daily_plan_with_setup )
+    agreement.create
+
+    render :json => agreement.to_json
+  end
+
   def execute_payment
   	#PayPal-Ruby-SDK does not have a method of finding agreement paymentToken. Agreement id is only assigned after executing it
   	#agreement = Agreement.find params[:paymentToken]

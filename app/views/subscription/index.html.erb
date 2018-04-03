@@ -1,14 +1,16 @@
 <h1>Subscribe Via PayPal</h1>
 
 <span>Rectangular, small, gold, label: pay, tagline: false<div id="paypal-button"></div><br/>
-<span>Pill, small, blue, label: paypal</span><div id="paypal-button-blue"></div><br/>
-<span>Pill, medium, silver</span><div id="paypal-button-silver"></div><br/>
+<span>WITH SETUP: Pill, small, blue, label: paypal</span><div id="paypal-button-blue"></div><br/>
+<span>WITHOUT SETUP: Pill, medium, silver</span><div id="paypal-button-silver"></div><br/>
 <span>Pill, large, black</span><div id="paypal-button-black"></div><br/>
 
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
 <script>
     var CREATE_PAYMENT_URL  = 'http://localhost:3000/subscription/create_subscription';
+    var CREATE_PAYMENT_URL_WITH_SETUP  = 'http://localhost:3000/subscription/create_subscription_with_setup';
+    var CREATE_PAYMENT_URL_WITHOUT_SETUP  = 'http://localhost:3000/subscription/create_subscription_without_setup';
     var EXECUTE_PAYMENT_URL = 'http://localhost:3000/subscription/execute_payment';
 
     paypal.Button.render({
@@ -72,7 +74,7 @@
         },
 
         payment: function() {
-            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+            return paypal.request.post(CREATE_PAYMENT_URL_WITH_SETUP).then(function(data) {
                 console.log(data)
                 return data.token;
             });
@@ -114,7 +116,7 @@
         },
 
         payment: function() {
-            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+            return paypal.request.post(CREATE_PAYMENT_URL_WITHOUT_SETUP).then(function(data) {
                 console.log(data)
                 return data.token;
             });

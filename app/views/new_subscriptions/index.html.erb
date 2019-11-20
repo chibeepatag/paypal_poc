@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 	 <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	</head>
+
+	<body>
+	  <script
+	       src="https://www.paypal.com/sdk/js?client-id=ASJFwR7mZgiNXsjMGQo56NghYpR21wEPnqsECQdWKoaXaTaMb_S_tdEB9KZiZyjHRjoUDdL42P4c4XcL&currency=PHP&vault=true">
+	  </script>
+	  <div id="paypal-button-container"></div>
+	  NEW SUBSCRIPTIONS
+	  <script>
+	    paypal.Buttons({
+		  createSubscription: function(data, actions) {
+		    return actions.subscription.create({
+		      'plan_id': 'P-8YN89483GE115874MLXKRB6Y'
+		    });
+
+		  },
+		  onApprove: function(data, actions) {
+		    alert('You have successfully created subscription ' + data.subscriptionID);
+		  },
+		  onCancel: function(data) {
+		    // Show a cancel page, or return to cart
+		  },
+		  onError: function(err){
+
+		  }
+		}).render('#paypal-button-container');
+	  </script>
+	</body>
+</html>

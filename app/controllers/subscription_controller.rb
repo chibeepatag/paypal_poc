@@ -20,7 +20,7 @@ class SubscriptionController < ApplicationController
 	    }   
 	  }
     agreement = Agreement.new(agreement_attributes)
-    agreement.plan =  Plan.new( :id => "P-7KB30620JA6802433S7TMGJQ" ) #replace with plan id generated in create_plan
+    agreement.plan =  Plan.new( :id => "P-1E348959H75276748Q7VEH6Q" ) #replace with plan id generated in create_plan
     agreement.create
 
     render :json => agreement.to_json

@@ -16,5 +16,8 @@ Rails.application.routes.draw do
   get 'payments/serverside'
 
   get 'peso/clientside'
+
+  get 'checkout/index'
+  post 'checkout/complete'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
